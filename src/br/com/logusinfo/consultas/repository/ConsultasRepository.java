@@ -20,6 +20,12 @@ public class ConsultasRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public ConsultasRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public List<Consulta> getConsultas() {
 		List<Consulta> consultas = new ArrayList<Consulta>();
 		try {
@@ -59,7 +65,7 @@ public class ConsultasRepository {
 					+ "	 IN_FORCA_ONLINE, \r\n"
 					+ "	 CONGELAR_CEL_EIXO_Y, \r\n"
 					+ "	 IN_PERMITE_ONLINE ");
-			sql.append(" FROM FLEX_DIVIDA_PI.FV_CONSULTA ");
+			sql.append(" FROM "+esquemaOrigem+".FV_CONSULTA ");
 			sql.append(" WHERE ID_CONSULTA > '008000' ");
 			sql.append(" ORDER BY ID_CONSULTA DESC");
 			ResultSet rs = statement.executeQuery(sql.toString());
@@ -69,34 +75,35 @@ public class ConsultasRepository {
 				consulta.setIdCubo(rs.getString(2));
 				consulta.setTituloConsulta(rs.getString(3));
 				consulta.setDesConsulta(rs.getString(4));
-				consulta.setExpFiltro(rs.getString(5));
-				consulta.setCodUsuario(rs.getString(6));
-				consulta.setTipoFiltroDados(rs.getString(7));
-				consulta.setIdCategory(rs.getString(8));
-				consulta.setIndicadorQuebraHierarquiaLinhas(rs.getString(9));
-				consulta.setIndicadorQuebraHierarquiaColunas(rs.getString(10));
-				consulta.setTipoCorteLinhas(rs.getString(11));
-				consulta.setTamanhoCorteLinhas(rs.getString(12));
-				consulta.setExpressaoCorteLinhas(rs.getString(13));
-				consulta.setTipoCorteColunas(rs.getString(14));
-				consulta.setTamanhoCorteColunas(rs.getString(15));
-				consulta.setExpressaoCorteColunas(rs.getString(16));
-				consulta.setTipoOrientacao(rs.getString(17));
-				consulta.setTamanhoLarguraGrafico(rs.getString(18));
-				consulta.setTamanhoAlturaGrafico(rs.getString(19));
-				consulta.setTipoGrafico(rs.getString(20));
-				consulta.setTipoGrafico3D(rs.getString(21));
-				consulta.setMerclarCelEixoY(rs.getString(22));
-				consulta.setUsarTitCustomEixoY(rs.getString(23));
-				consulta.setTituloCustomEixoY(rs.getString(24));
-				consulta.setVazioLugarZero(rs.getString(25));
-				consulta.setRepetirHeaderPag(rs.getString(26));
-				consulta.setCodHeader(rs.getString(27));
-				consulta.setCodFooter(rs.getString(28));
-				consulta.setIndicadorSQLANSI(rs.getString(29));
-				consulta.setIndicadorForcaOnline(rs.getString(30));
-				consulta.setCongelarCelularEixoY(rs.getString(31));
-				consulta.setIndicadorPermiteOnline(rs.getString(32));
+				consulta.setTipVisualizacao(rs.getString(5));
+				consulta.setExpFiltro(rs.getString(6));
+				consulta.setCodUsuario(rs.getString(7));
+				consulta.setTipoFiltroDados(rs.getString(8));
+				consulta.setIdCategory(rs.getString(9));
+				consulta.setIndicadorQuebraHierarquiaLinhas(rs.getString(10));
+				consulta.setIndicadorQuebraHierarquiaColunas(rs.getString(11));
+				consulta.setTipoCorteLinhas(rs.getString(12));
+				consulta.setTamanhoCorteLinhas(rs.getString(13));
+				consulta.setExpressaoCorteLinhas(rs.getString(14));
+				consulta.setTipoCorteColunas(rs.getString(15));
+				consulta.setTamanhoCorteColunas(rs.getString(16));
+				consulta.setExpressaoCorteColunas(rs.getString(17));
+				consulta.setTipoOrientacao(rs.getString(18));
+				consulta.setTamanhoLarguraGrafico(rs.getString(19));
+				consulta.setTamanhoAlturaGrafico(rs.getString(20));
+				consulta.setTipoGrafico(rs.getString(21));
+				consulta.setTipoGrafico3D(rs.getString(22));
+				consulta.setMerclarCelEixoY(rs.getString(23));
+				consulta.setUsarTitCustomEixoY(rs.getString(24));
+				consulta.setTituloCustomEixoY(rs.getString(25));
+				consulta.setVazioLugarZero(rs.getString(26));
+				consulta.setRepetirHeaderPag(rs.getString(27));
+				consulta.setCodHeader(rs.getString(28));
+				consulta.setCodFooter(rs.getString(29));
+				consulta.setIndicadorSQLANSI(rs.getString(30));
+				consulta.setIndicadorForcaOnline(rs.getString(31));
+				consulta.setCongelarCelularEixoY(rs.getString(32));
+				consulta.setIndicadorPermiteOnline(rs.getString(33));
 				consultas.add(consulta);
 			}
 		} catch (ConnectionException | SQLException e) {

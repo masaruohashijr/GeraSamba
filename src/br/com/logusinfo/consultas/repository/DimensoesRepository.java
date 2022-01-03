@@ -15,6 +15,12 @@ public class DimensoesRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public DimensoesRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public Dimensao getDimensao(String idDimensao) {
 		Dimensao dimensao = new Dimensao();
 		try {
@@ -24,7 +30,7 @@ public class DimensoesRepository {
 					+ " tit_dimensao, "
 					+ " des_dimensao, "
 					+ " flg_valido "
-					+ " from flex_divida_pi.dimensao "
+					+ " from "+esquemaOrigem+".dimensao "
 					+ " where id_dimensao = ? ");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idDimensao);
@@ -33,7 +39,7 @@ public class DimensoesRepository {
 				dimensao.setId(rs.getString(1));
 				dimensao.setTitulo(rs.getString(2));
 				dimensao.setDescricao(rs.getString(3));
-				dimensao.setValida(rs.getString(4));
+				dimensao.setValido(rs.getString(4));
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());			

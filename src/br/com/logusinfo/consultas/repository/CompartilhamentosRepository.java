@@ -18,6 +18,12 @@ public class CompartilhamentosRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public CompartilhamentosRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public List<Compartilhamento> getCompartilhamentos(String idConsulta) {
 		List<Compartilhamento> compartilhamentos  = new ArrayList<Compartilhamento>();
 		try {
@@ -31,7 +37,7 @@ public class CompartilhamentosRepository {
 					+ "    cod_perfil,\r\n"
 					+ "    id_dashboard\r\n"
 					+ " FROM\r\n"
-					+ "    flex_divida_pi.compartilhamento"
+					+ "    "+esquemaOrigem+".compartilhamento"
 					+ " WHERE id_consulta = ?");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idConsulta);

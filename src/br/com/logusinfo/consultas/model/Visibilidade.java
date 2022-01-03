@@ -48,11 +48,6 @@ public class Visibilidade implements Exportavel {
 		this.expressaoFiltro = expressaoFiltro;
 	}
 
-	@Override
-	public String DML() {
-		return "Visibilidade";
-	}
-
 	public String getIdCubo() {
 		return idCubo;
 	}
@@ -61,5 +56,34 @@ public class Visibilidade implements Exportavel {
 		this.idCubo = idCubo;
 	}
 	
-
+	@Override
+	public String DML(String esquemaDestino) {
+		String sql = "INSERT INTO "+esquemaDestino+".visibilidade (\r\n"
+				+ "    id_visibilidade,\r\n"
+				+ "    id_cubo,\r\n"
+				+ "    cod_usuario,\r\n"
+				+ "    cod_perfil,\r\n"
+				+ "    exp_filtro\r\n"
+				+ ") SELECT \r\n"
+				+ "    (SELECT LPAD(MAX(ID_VISIBILIDADE)+1,6,'0') FROM "+esquemaDestino+".VISIBILIDADE),\r\n"
+				+ "    (SELECT ID_CUBO FROM "+esquemaDestino+".CUBO WHERE TIT_CUBO = '"+this.cubo.getTitulo()+"'),\r\n"
+				+ "    '"+this.codigoUsuario+"',\r\n"
+				+ "    '"+this.codigoPerfil+"',\r\n"
+				+ "    '"+this.expressaoFiltro+"'\r\n"
+				+ " WHERE NOT EXISTS (SELECT NULL FROM "+esquemaDestino+".visibilidade WHERE "
+				+ " ID_CUBO = (SELECT ID_CUBO FROM "+esquemaDestino+".CUBO WHERE TIT_CUBO = '"+this.cubo.getTitulo()+"')\r\n";
+				if(null == this.codigoUsuario) {
+					sql += " AND COD_USUARIO = "+this.codigoUsuario;
+					
+				} else {
+					sql += " AND COD_USUARIO = '"+this.codigoUsuario+"'";
+				}
+				if(null == this.codigoPerfil) {
+					sql += " AND COD_PERFIL = "+this.codigoPerfil;
+				} else {
+					sql += " AND COD_PERFIL = '"+this.codigoPerfil+"'";
+				}
+				sql += ");";
+				return sql;
+	}
 }

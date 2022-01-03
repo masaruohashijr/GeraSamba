@@ -19,6 +19,12 @@ public class NodesRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public NodesRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public List<Node> getNodes(String idConsulta) {
 		List<Node> nodes = new ArrayList<Node>();
 		try {
@@ -50,7 +56,7 @@ public class NodesRepository {
 					+ "    tam_corte,\r\n"
 					+ "    exp_corte\r\n"
 					+ "FROM\r\n"
-					+ "    flex_divida_pi.fv_no_consulta\r\n"
+					+ "    "+esquemaOrigem+".fv_no_consulta\r\n"
 					+ "WHERE \r\n"
 					+ "    id_consulta = ?");
 			pstmt = connection.prepareStatement(sql.toString());

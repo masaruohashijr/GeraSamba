@@ -19,6 +19,13 @@ public class PropriedadesRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public PropriedadesRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<Propriedade> getPropriedades(String idConsulta) {
 		List<Propriedade> propriedades = new ArrayList<Propriedade>();
 		try {
@@ -39,9 +46,10 @@ public class PropriedadesRepository {
 						+ "    a.id_estilo,\r\n"
 						+ "    a.seq_no,\r\n"
 						+ "    a.seq_propriedade_no\r\n"
-						+ "FROM\r\n"
-						+ "    FLEX_DIVIDA_PI.fv_propriedade_no a left join FLEX_DIVIDA_PI.propriedade b on a.id_propriedade = b.id_propriedade\r\n"
-						+ "WHERE \r\n"
+						+ " FROM\r\n"
+						+ "    "+esquemaOrigem+".fv_propriedade_no a \r\n"
+						+ " LEFT JOIN flex_divida_pi.propriedade b ON a.id_propriedade = b.id_propriedade \r\n"
+						+ " WHERE \r\n"
 						+ "    a.id_consulta = ?");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idConsulta);

@@ -1,14 +1,14 @@
 package br.com.logusinfo.consultas.model;
 
 public class Medida implements Exportavel{
-	private String id;
-	private String idCubo;
+	private String id = "";
+	private String idCubo = "";
 	private Cubo cubo;
-	private String colMedida;
-	private String tituloMedida;
-	private String expressaoFiltro;
-	private String ehPadrao;
-	private String descricaoMedida;
+	private String colMedida = "";
+	private String tituloMedida = "";
+	private String expressaoFiltro = "";
+	private String ehPadrao = "";
+	private String descricaoMedida = "";
 
 	public String getId() {
 		return id;
@@ -60,8 +60,28 @@ public class Medida implements Exportavel{
 	}
 	
 	@Override
-	public String DML() {
-		return "Medida";
+	public String DML(String esquemaDestino) {
+		return "INSERT INTO "+esquemaDestino+".medida (\r\n"
+				+ "    id_medida,\r\n"
+				+ "    id_cubo,\r\n"
+				+ "    col_medida,\r\n"
+				+ "    tit_medida,\r\n"
+				+ "    exp_filtro,\r\n"
+				+ "    e_padrao,\r\n"
+				+ "    des_medida\r\n"
+				+ ") SELECT \r\n"
+				+ "    (SELECT LPAD(MAX(ID_MEDIDA)+1,6,'0') FROM "+esquemaDestino+".MEDIDA),\r\n"
+				+ "    (SELECT ID_CUBO FROM \r\n"
+				+ "		"+esquemaDestino+".CUBO \r\n"
+				+ "		WHERE TIT_CUBO = '"+this.cubo.getTitulo()+"'), \r\n"
+				+ "    '"+this.colMedida+"',\r\n"
+				+ "    '"+this.tituloMedida+"',\r\n"
+				+ "    '"+this.expressaoFiltro+"',\r\n"
+				+ "    '"+this.ehPadrao+"',\r\n"
+				+ "    '"+this.descricaoMedida+"'\r\n"
+				+ " FROM DUAL \r\n" 
+				+ " WHERE NOT EXISTS \r\n" 
+				+ " (SELECT NULL FROM "+esquemaDestino+".medida WHERE tit_medida = '"+this.tituloMedida+"');\r\n"; 
 	}
 	
 }

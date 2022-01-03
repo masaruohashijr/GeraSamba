@@ -1,11 +1,20 @@
 package br.com.logusinfo.consultas.services;
 
 import br.com.logusinfo.consultas.model.Medida;
+import br.com.logusinfo.consultas.model.Node;
 import br.com.logusinfo.consultas.repository.MedidasRepository;
 
 public class MedidasService {
-	public Medida getMedida(String idMedida) {
-		MedidasRepository repository = new MedidasRepository();
+	private String esquemaOrigem;
+
+	public MedidasService(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+		// TODO Auto-generated constructor stub
+	}
+
+	public Medida getMedida(Node node) {
+		String idMedida = node.getIdMedida();
+		MedidasRepository repository = new MedidasRepository(esquemaOrigem);
 		Medida medida = repository.getMedida(idMedida);
 		return medida;
 	}

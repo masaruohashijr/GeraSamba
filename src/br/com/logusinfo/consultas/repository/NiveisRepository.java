@@ -17,27 +17,35 @@ public class NiveisRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public NiveisRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<Nivel> getNiveisCubo(String idCubo) {
 		List<Nivel> niveis = new ArrayList<Nivel>();
 		try {
 			connection = ConnUtil.init();
 			sql = new StringBuilder();
-			sql.append(" SELECT\r\n" 
-					+ "    a.id_cubo,\r\n" 
-					+ "    a.id_nivel,\r\n" 
-					+ "    a.col_fato,\r\n"
-					+ "    b.id_dimensao,\r\n" 
-					+ "    b.tit_nivel,\r\n" 
-					+ "    b.tit_abreviado,\r\n"
-					+ "    b.tab_nivel,\r\n" 
-					+ "    b.col_nivel,\r\n" 
-					+ "    b.col_titulo,\r\n"
-					+ "    b.des_mascara,\r\n" 
-					+ "    b.esquema\r\n" 
-					+ " FROM\r\n"
-					+ "         flex_divida_pi.nivel_cubo a\r\n"
-					+ "    INNER JOIN flex_divida_pi.nivel b ON a.id_nivel = b.id_nivel\r\n" + "WHERE\r\n"
-					+ "    a.id_cubo = ?");
+			sql.append(" SELECT \r\n" 
+					+ "    b.id_cubo, \r\n" 
+					+ "    b.id_nivel, \r\n" 
+					+ "    b.col_fato, \r\n"
+					+ "    a.id_dimensao, \r\n" 
+					+ "    a.tit_nivel, \r\n" 
+					+ "    a.tit_abreviado, \r\n"
+					+ "    a.tab_nivel, \r\n" 
+					+ "    a.col_nivel, \r\n" 
+					+ "    a.col_titulo, \r\n"
+					+ "    a.des_mascara, \r\n" 
+					+ "    a.esquema \r\n" 
+					+ " FROM \r\n"
+					+ "         "+esquemaOrigem+".nivel a \r\n"
+					+ "    LEFT JOIN flex_divida_pi.nivel_cubo b ON a.id_nivel = b.id_nivel \r\n"
+					+ " WHERE \r\n"
+					+ "    b.id_cubo = ?");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idCubo);
 			ResultSet rs = pstmt.executeQuery();
@@ -79,7 +87,7 @@ public class NiveisRepository {
 					+ "    des_mascara,\r\n"
 					+ "    esquema\r\n"
 					+ " FROM\r\n"
-					+ "    flex_divida_pi.nivel"
+					+ "    "+esquemaOrigem+".nivel"
 					+ " WHERE id_nivel = ?");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idNivel);

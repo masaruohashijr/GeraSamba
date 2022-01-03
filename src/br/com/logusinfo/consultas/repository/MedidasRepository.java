@@ -21,6 +21,12 @@ public class MedidasRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public MedidasRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public Medida getMedida(String idMedida) {
 		Medida medida = new Medida();
 		try {
@@ -35,7 +41,7 @@ public class MedidasRepository {
 					+ "    e_padrao, \r\n"
 					+ "    des_medida \r\n"
 					+ " FROM \r\n"
-					+ "    flex_divida_pi.medida \r\n"
+					+ "    "+esquemaOrigem+".medida \r\n"
 					+ " WHERE id_medida = ? ");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idMedida);

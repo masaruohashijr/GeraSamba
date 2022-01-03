@@ -21,6 +21,12 @@ public class VisibilidadesRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public VisibilidadesRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public List<Visibilidade> getVisibilidades(String idCubo) {
 		List<Visibilidade> visibilidades = new ArrayList<Visibilidade>();
 		try {
@@ -33,7 +39,7 @@ public class VisibilidadesRepository {
 					+ "    cod_perfil,\r\n"
 					+ "    exp_filtro\r\n"
 					+ " FROM\r\n"
-					+ "    flex_divida_pi.visibilidade"
+					+ "    "+esquemaOrigem+".visibilidade"
 					+ " WHERE id_cubo = ?");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idCubo);

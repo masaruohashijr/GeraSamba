@@ -9,8 +9,16 @@ import br.com.logusinfo.consultas.repository.FiltrosRepository;
 import br.com.logusinfo.consultas.repository.NodesRepository;
 
 public class FiltrosService {
-	public Filtro getFiltro(String idFiltro) {
-		FiltrosRepository repository = new FiltrosRepository();
+	private String esquemaOrigem;
+
+	public FiltrosService(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+		// TODO Auto-generated constructor stub
+	}
+
+	public Filtro getFiltro(Node node) {
+		String idFiltro = node.getIdFiltro();
+		FiltrosRepository repository = new FiltrosRepository(esquemaOrigem);
 		Filtro filtro = repository.getFiltro(idFiltro);
 		return filtro;
 	}

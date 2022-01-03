@@ -20,6 +20,12 @@ public class FiltrosRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public FiltrosRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public Filtro getFiltro(String idFiltro) {
 		Filtro filtro = new Filtro();
 		try {
@@ -33,7 +39,7 @@ public class FiltrosRepository {
 					+ "    exp_filtro,\r\n"
 					+ "    des_filtro\r\n"
 					+ " FROM\r\n"
-					+ "    flex_divida_pi.filtro"
+					+ "    "+esquemaOrigem+".filtro"
 					+ " WHERE id_filtro = ? ");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idFiltro);

@@ -28,12 +28,22 @@ public class Node implements Exportavel {
 	private Nivel nivel;
 	private Filtro filtro;
 	private Medida medida;
+	private Consulta consulta;
+
+	public Consulta getConsulta() {
+		return consulta;
+	}
+
+	public void setConsulta(Consulta consulta) {
+		this.consulta = consulta;
+	}
 
 	public String getIdConsulta() {
 		return idConsulta;
 	}
 
 	public void setIdConsulta(String idConsulta) {
+		idConsulta = (idConsulta==null)?"":idConsulta;
 		this.idConsulta = idConsulta;
 	}
 
@@ -42,6 +52,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setIdEixo(String idEixo) {
+		idEixo = (idEixo==null)?"":idEixo;
 		this.idEixo = idEixo;
 	}
 
@@ -50,6 +61,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setSeqNo(String seqNo) {
+		seqNo = (seqNo==null)?"":seqNo;
 		this.seqNo = seqNo;
 	}
 
@@ -58,6 +70,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setSeqNoSup(String seqNoSup) {
+		seqNoSup = (seqNoSup==null)?"":seqNoSup;
 		this.seqNoSup = seqNoSup;
 	}
 
@@ -66,6 +79,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setIdNivel(String idNivel) {
+		idNivel = (idNivel==null)?"":idNivel;
 		this.idNivel = idNivel;
 	}
 
@@ -74,6 +88,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setIdFiltro(String idFiltro) {
+		idFiltro = (idFiltro==null)?"":idFiltro;
 		this.idFiltro = idFiltro;
 	}
 
@@ -82,6 +97,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setIdMedida(String idMedida) {
+		idMedida = (idMedida==null)?"":idMedida;
 		this.idMedida = idMedida;
 	}
 
@@ -90,6 +106,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setIdEstiloCab(String idEstiloCab) {
+		idEstiloCab = (idEstiloCab==null)?"":idEstiloCab;
 		this.idEstiloCab = idEstiloCab;
 	}
 
@@ -98,6 +115,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setIdEstiloCel(String idEstiloCel) {
+		idEstiloCel = (idEstiloCel==null)?"":idEstiloCel;
 		this.idEstiloCel = idEstiloCel;
 	}
 
@@ -106,6 +124,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setCodClassificador(String codClassificador) {
+		codClassificador = (codClassificador==null)?"":codClassificador;
 		this.codClassificador = codClassificador;
 	}
 
@@ -114,6 +133,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setTitNo(String titNo) {
+		titNo = (titNo==null)?"":titNo;
 		this.titNo = titNo;
 	}
 
@@ -122,6 +142,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setNumDecimais(String numDecimais) {
+		numDecimais = (numDecimais==null)?"":numDecimais;
 		this.numDecimais = numDecimais;
 	}
 
@@ -130,6 +151,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setSeparadorMilhar(String separadorMilhar) {
+		separadorMilhar = (separadorMilhar==null)?"":separadorMilhar;
 		this.separadorMilhar = separadorMilhar;
 	}
 
@@ -138,6 +160,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setUnidMonetaria(String unidMonetaria) {
+		unidMonetaria = (unidMonetaria==null)?"":unidMonetaria;
 		this.unidMonetaria = unidMonetaria;
 	}
 
@@ -146,6 +169,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setExpFiltro(String expFiltro) {
+		expFiltro = (expFiltro==null)?"":expFiltro;
 		this.expFiltro = expFiltro;
 	}
 
@@ -154,6 +178,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setFuncAgregacao(String funcAgregacao) {
+		funcAgregacao = (funcAgregacao==null)?"":funcAgregacao;
 		this.funcAgregacao = funcAgregacao;
 	}
 
@@ -162,6 +187,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setPrioAgregacao(String prioAgregacao) {
+		prioAgregacao = (prioAgregacao==null)?"":prioAgregacao;
 		this.prioAgregacao = prioAgregacao;
 	}
 
@@ -170,6 +196,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setPrioFormatacao(String prioFormatacao) {
+		prioFormatacao = (prioFormatacao==null)?"":prioFormatacao;
 		this.prioFormatacao = prioFormatacao;
 	}
 
@@ -178,6 +205,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setDispFilhos(String dispFilhos) {
+		dispFilhos = (dispFilhos==null)?"":dispFilhos;
 		this.dispFilhos = dispFilhos;
 	}
 
@@ -186,6 +214,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setIniciarPagina(String iniciarPagina) {
+		iniciarPagina = (iniciarPagina==null)?"":iniciarPagina;
 		this.iniciarPagina = iniciarPagina;
 	}
 
@@ -195,6 +224,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setOcultar(String ocultar) {
+		ocultar = (ocultar==null)?"":ocultar;
 		this.ocultar = ocultar;
 	}
 
@@ -203,6 +233,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setTipoCorte(String tipoCorte) {
+		tipoCorte = (tipoCorte==null)?"":tipoCorte;
 		this.tipoCorte = tipoCorte;
 	}
 
@@ -211,6 +242,7 @@ public class Node implements Exportavel {
 	}
 
 	public void setTamCorte(String tamCorte) {
+		tamCorte = (tamCorte==null)?"":tamCorte;
 		this.tamCorte = tamCorte;
 	}
 
@@ -219,14 +251,10 @@ public class Node implements Exportavel {
 	}
 
 	public void setExpCorte(String expCorte) {
+		expCorte = (expCorte==null)?"":expCorte;
 		this.expCorte = expCorte;
 	}
 
-	@Override
-	public String DML() {
-		return "Node";
-	}
-	
 	public void setNivel(Nivel nivel) {
 		this.nivel = nivel;		
 	}
@@ -249,6 +277,66 @@ public class Node implements Exportavel {
 
 	public Medida getMedida() {
 		return medida;
+	}
+	
+	@Override
+	public String DML(String esquemaDestino) {
+		String sql ="INSERT INTO "+esquemaDestino+".fv_no_consulta (\r\n"
+				+ "    id_consulta,\r\n"
+				+ "    id_eixo,\r\n"
+				+ "    seq_no,\r\n"
+				+ "    seq_no_sup,\r\n"
+				+ "    id_nivel,\r\n"
+				+ "    id_filtro,\r\n"
+				+ "    id_medida,\r\n"
+				+ "    id_estilo_cab,\r\n"
+				+ "    id_estilo_cel,\r\n"
+				+ "    cod_classificador,\r\n"
+				+ "    tit_no,\r\n"
+				+ "    num_decimais,\r\n"
+				+ "    separador_milhar,\r\n"
+				+ "    unid_monetaria,\r\n"
+				+ "    exp_filtro,\r\n"
+				+ "    func_agregacao,\r\n"
+				+ "    prio_agregacao,\r\n"
+				+ "    prio_formatacao,\r\n"
+				+ "    disp_filhos,\r\n"
+				+ "    iniciar_pagina,\r\n"
+				+ "    ocultar,\r\n"
+				+ "    tipo_corte,\r\n"
+				+ "    tam_corte,\r\n"
+				+ "    exp_corte\r\n"
+				+ ") SELECT \r\n"
+				+ "    (SELECT ID_CONSULTA FROM "+esquemaDestino+".fv_consulta WHERE TIT_CONSULTA = '"+this.consulta.getTituloConsulta()+"') ,\r\n"
+				+ "    '"+this.idEixo+"',\r\n"
+				+ "    '"+this.seqNo+"',\r\n"
+				+ "    '"+this.seqNoSup+"',\r\n"
+				+ "    (SELECT ID_NIVEL FROM "+esquemaDestino+".nivel WHERE TIT_NIVEL = '"+this.nivel.getTitulo()+"') ,\r\n"
+				+ "    (SELECT ID_FILTRO FROM "+esquemaDestino+".filtro WHERE TIT_FILTRO = '"+this.filtro.getTituloFiltro()+"') ,\r\n"
+				+ "    (SELECT ID_MEDIDA FROM "+esquemaDestino+".medida WHERE TIT_MEDIDA = '"+this.medida.getTituloMedida()+"') ,\r\n"
+				+ "    NULL,\r\n"
+				+ "    NULL,\r\n"
+				+ "    '"+this.codClassificador+"', \r\n"
+				+ "    '"+this.titNo+"', \r\n"
+				+ "    '"+this.numDecimais+"', \r\n"
+				+ "    '"+this.separadorMilhar+"', \r\n"
+				+ "    '"+this.unidMonetaria+"', \r\n"
+				+ "    '"+this.expFiltro+"', \r\n"
+				+ "    '"+this.funcAgregacao+"', \r\n"
+				+ "    '"+this.prioAgregacao+"', \r\n"
+				+ "    '"+this.prioFormatacao+"', \r\n"
+				+ "    '"+this.dispFilhos+"', \r\n"
+				+ "    '"+this.iniciarPagina+"', \r\n"
+				+ "    '"+this.ocultar+"', \r\n"
+				+ "    '"+this.tipoCorte+"', \r\n"
+				+ "    '"+this.expCorte+"' \r\n"
+				+ " FROM DUAL \r\n"
+				+ " WHERE NOT EXISTS \r\n"
+				+ " (SELECT NULL FROM "+esquemaDestino+".FV_NO_CONSULTA "
+				+ " WHERE ID_CONSULTA = (SELECT A.ID_CONSULTA FROM "+esquemaDestino+".fv_consulta A WHERE A.TIT_CONSULTA = '"
+				+ this.consulta.getTituloConsulta()+"') AND "
+				+ " TIT_NO = '"+this.titNo+"');";
+		return sql;
 	}
 	
 }

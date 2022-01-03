@@ -1,5 +1,5 @@
 package br.com.logusinfo.consultas.model;
 
 public interface Exportavel {
-	String DML();
+	String DML(String esquemaDestino);
 }

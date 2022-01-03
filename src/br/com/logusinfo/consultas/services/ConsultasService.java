@@ -4,18 +4,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.apache.commons.math3.ode.FirstOrderConverter;
-
 import br.com.logusinfo.consultas.model.Consulta;
 import br.com.logusinfo.consultas.repository.ConsultasRepository;
 
 public class ConsultasService {
 	
-	private List<Consulta> consultas; 
+	private List<Consulta> consultas;
+	private String esquemaOrigem; 
+
+	public ConsultasService(String esquemaOrigem) {
+		super();
+		this.esquemaOrigem = esquemaOrigem;
+	}
 
 	public List<Consulta> getConsultas() {
 		if(null==consultas || consultas.size()==0) {
-			ConsultasRepository repository = new ConsultasRepository();
+			ConsultasRepository repository = new ConsultasRepository(esquemaOrigem);
 			consultas = repository.getConsultas();
 		}
 		return consultas;
@@ -41,4 +45,10 @@ public class ConsultasService {
 		}
 		return items;
 	}
+	
+
+	public String getIdConsulta(String text) {
+		return text.split("-")[0].trim();
+	}
+
 }

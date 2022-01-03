@@ -18,20 +18,25 @@ public class CubosRepository {
 
 	private StringBuilder sql;
 
+	private String esquemaOrigem;
+
+	public CubosRepository(String esquemaOrigem) {
+		this.esquemaOrigem = esquemaOrigem;
+	}
+
 	public Cubo getCubo(String idConsulta) {
-		Cubo cubo = null;
+		Cubo cubo = new Cubo();
 		try {
 			connection = ConnUtil.init();
 			sql = new StringBuilder();
 			sql.append(" SELECT B.ID_CUBO, B.TIT_CUBO, B.TAB_FATO, B.ESQUEMA, B.VALIDO , B.DES_CUBO ");
-			sql.append(" FROM FLEX_DIVIDA_PI.FV_CONSULTA A ");
+			sql.append(" FROM "+esquemaOrigem+".FV_CONSULTA A ");
 			sql.append(" LEFT JOIN FLEX_DIVIDA_PI.CUBO B ON A.ID_CUBO = B.ID_CUBO ");
 			sql.append(" WHERE A.ID_CONSULTA = ?");
 			pstmt = connection.prepareStatement(sql.toString());
 			pstmt.setString(1, idConsulta);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				cubo = new Cubo();
 				cubo.setId(rs.getString(1));
 				cubo.setTitulo(rs.getString(2));
 				cubo.setTabelaFato(rs.getString(3));
