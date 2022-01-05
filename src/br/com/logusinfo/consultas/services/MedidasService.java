@@ -14,6 +14,9 @@ public class MedidasService {
 
 	public Medida getMedida(Node node) {
 		String idMedida = node.getIdMedida();
+		if(idMedida.isBlank()) {
+			return new Medida();
+		}
 		MedidasRepository repository = new MedidasRepository(esquemaOrigem);
 		Medida medida = repository.getMedida(idMedida);
 		return medida;

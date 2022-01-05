@@ -18,6 +18,7 @@ public class VisibilidadesService {
 		String idCubo = cubo.getId();
 		VisibilidadesRepository repository = new VisibilidadesRepository(esquemaOrigem);
 		List<Visibilidade> visibilidades = repository.getVisibilidades(idCubo);
+		visibilidades.stream().forEach(v->{v.setCubo(cubo);});
 		return visibilidades;
 	}
 }

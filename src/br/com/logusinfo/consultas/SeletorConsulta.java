@@ -23,7 +23,8 @@ public class SeletorConsulta {
 	private Shell shell;
 	private String esquemaOrigem;
 	private String esquemaDestino;
-
+	//TODO Implementar DML de Propriedades, Medidas e Filtros.
+	//TODO Implementar botão de Cópia. 
 	public SeletorConsulta() {
 		display = new Display();
 		shell = new Shell(display);
@@ -61,9 +62,6 @@ public class SeletorConsulta {
 		Button buttonGera = new Button(shell, SWT.BUTTON1);
 		buttonGera.setText("Gera");
 		buttonGera.setEnabled(false);
-		
-		Button buttonCopy = new Button(shell, SWT.BUTTON1);
-		buttonCopy.setText("Copia");
 		
 		Text textArea = new Text(shell, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 	    GridData gridData = new GridData(GridData.FILL_BOTH);

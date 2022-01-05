@@ -1,6 +1,8 @@
 package br.com.logusinfo.consultas.services;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import br.com.logusinfo.consultas.model.Consulta;
 import br.com.logusinfo.consultas.model.Cubo;
@@ -20,24 +22,42 @@ public class ScriptsService {
 	}
 
 	public StringBuilder generate(StringBuilder scriptDML, Consulta consulta) {
+		Set<String> jahEscritos = new HashSet<String>();
 		Cubo cubo = consulta.getCubo();
 		List<Nivel> niveis = cubo.getNiveis();
+		String chave = "";
 		for (Nivel nivel : niveis) {
 			Dimensao dimensao = nivel.getDimensao();
 			if(null!=dimensao && !dimensao.getTitulo().isBlank()) {
 				scriptDML.append("--DIMENSAO-----------------\n");
-				scriptDML.append(dimensao.DML(esquemaDestino)+"\n");
+				chave = dimensao.getClass().getTypeName()+dimensao.getId();
+				if(!jahEscritos.contains(chave)) {
+					scriptDML.append(dimensao.DML(esquemaDestino)+"\n");
+					jahEscritos.add(chave);
+				}
 				scriptDML.append("--------------------------\n");
 			}
 			scriptDML.append("--NIVEL--------------------\n");
-			scriptDML.append(nivel.DML(esquemaDestino)+"\n");
+			chave = nivel.getClass().getTypeName()+nivel.getIdNivel();
+			if(!jahEscritos.contains(chave)) {
+				scriptDML.append(nivel.DML(esquemaDestino)+"\n");
+				jahEscritos.add(chave);
+			}
 			scriptDML.append("--------------------------\n");
 		}
 		scriptDML.append("--CUBO--------------------\n");
-		scriptDML.append(cubo.DML(esquemaDestino)+"\n");
+		chave = cubo.getClass().getTypeName()+cubo.getId();
+		if(!jahEscritos.contains(chave)) {
+			scriptDML.append(cubo.DML(esquemaDestino)+"\n");
+			jahEscritos.add(chave);
+		}
 		scriptDML.append("--------------------------\n");
 		scriptDML.append("--CONSULTA-----------------\n");
-		scriptDML.append(consulta.DML(esquemaDestino)+"\n");
+		chave = consulta.getClass().getTypeName()+consulta.getIdConsulta();
+		if(!jahEscritos.contains(chave)) {
+			scriptDML.append(consulta.DML(esquemaDestino)+"\n");
+			jahEscritos.add(chave);
+		}
 		scriptDML.append("--------------------------\n");
 		List<Node> nodes = consulta.getNodes();
 		for (Node node : nodes) {
@@ -46,49 +66,80 @@ public class ScriptsService {
 				Dimensao dimensao = nivel.getDimensao();
 				if(null != dimensao && null!=dimensao.getTitulo() && !dimensao.getTitulo().isBlank()) {		
 					scriptDML.append("--DIMENSAO-----------------\n");
-					scriptDML.append(dimensao.DML(esquemaDestino)+"\n");
+					chave = dimensao.getClass().getTypeName()+dimensao.getId();
+					if(!jahEscritos.contains(chave)) {
+						scriptDML.append(dimensao.DML(esquemaDestino)+"\n");
+						jahEscritos.add(chave);
+					}
 					scriptDML.append("--------------------------\n");
 					scriptDML.append("--NIVEL--------------------\n");
-					scriptDML.append(nivel.DML(esquemaDestino)+"\n");
+					chave = nivel.getClass().getTypeName()+nivel.getIdNivel();
+					if(!jahEscritos.contains(chave)) {
+						scriptDML.append(nivel.DML(esquemaDestino)+"\n");
+						jahEscritos.add(chave);
+					}
 					scriptDML.append("--------------------------\n");
-					Filtro filtro = node.getFiltro();
-					if(null != filtro && null!=filtro.getTituloFiltro() && !filtro.getTituloFiltro().isBlank()) {
-						scriptDML.append("--FILTRO-------------------\n");
-						scriptDML.append(filtro.DML(esquemaDestino)+"\n");
-						scriptDML.append("--------------------------\n");
-					}
-					Medida medida = node.getMedida();
-					if(null != medida && null!=medida.getTituloMedida() && !medida.getTituloMedida().isBlank()) {
-						scriptDML.append("--MEDIDA-------------------\n");
-						scriptDML.append(medida.DML(esquemaDestino)+"\n");
-						scriptDML.append("--------------------------\n");
-					}
 				}
 			}
+			Filtro filtro = node.getFiltro();
+			if(null != filtro && null!=filtro.getTituloFiltro() && !filtro.getTituloFiltro().isBlank()) {
+				scriptDML.append("--FILTRO-------------------\n");
+				chave = filtro.getClass().getTypeName()+filtro.getId();
+				if(!jahEscritos.contains(chave)) {
+					scriptDML.append(filtro.DML(esquemaDestino)+"\n");
+					jahEscritos.add(chave);
+				}
+				scriptDML.append("--------------------------\n");
+			}
+			Medida medida = node.getMedida();
+			if(null != medida && null!=medida.getTituloMedida() && !medida.getTituloMedida().isBlank()) {
+				scriptDML.append("--MEDIDA-------------------\n");
+				chave = medida.getClass().getTypeName()+medida.getId();
+				if(!jahEscritos.contains(chave)) {
+					scriptDML.append(medida.DML(esquemaDestino)+"\n");
+					jahEscritos.add(chave);
+				}
+				scriptDML.append("--------------------------\n");
+			}
 			scriptDML.append("--NODE-------------------\n");
-			scriptDML.append(node.DML(esquemaDestino)+"\n");
+			
+			chave = node.getClass().getTypeName()+node.getIdConsulta()+node.getIdEixo()+node.getSeqNo();
+			if(!jahEscritos.contains(chave)) {
+				scriptDML.append(node.DML(esquemaDestino)+"\n");
+				jahEscritos.add(chave);
+			}
 			scriptDML.append("--------------------------\n");
 			
 		}
-		/*
 		List<Propriedade> propriedades = consulta.getPropriedades();
 		for (Propriedade propriedade : propriedades) {
 			Nivel nivel = propriedade.getNivel();
 			Dimensao dimensao = nivel.getDimensao();
-			scriptDML.append(dimensao.DML()+"\n");
-			scriptDML.append(nivel.DML()+"\n");
-			scriptDML.append(propriedade.DML()+"\n");
+			chave = dimensao.getClass().getTypeName()+dimensao.getId();
+			if(!jahEscritos.contains(chave)) {
+				scriptDML.append(dimensao.DML(esquemaDestino)+"\n");
+				jahEscritos.add(chave);
+			}
+			chave = nivel.getClass().getTypeName()+nivel.getIdNivel();
+			if(!jahEscritos.contains(chave)) {
+				scriptDML.append(nivel.DML(esquemaDestino)+"\n");
+				jahEscritos.add(chave);
+			}
+			chave = propriedade.getClass().getTypeName()+propriedade.getId();
+			if(!jahEscritos.contains(chave)) {
+				scriptDML.append(propriedade.DML(esquemaDestino)+"\n");
+				jahEscritos.add(chave);
+			}
 		}
 		
-		scriptDML.append(consulta.DML()+"\n");
 		consulta.getCubo().getVisibilidades().stream().forEach(
 				visibilidade->{
-					scriptDML.append(visibilidade.DML()+"\n");
+					scriptDML.append(visibilidade.DML(esquemaDestino)+"\n");
 				});
 		consulta.getCompartilhamentos().stream().forEach(
 				compartilhamento->{
-					scriptDML.append(compartilhamento.DML()+"\n");
-				});*/
+					scriptDML.append(compartilhamento.DML(esquemaDestino)+"\n");
+				});
 		return scriptDML;
 	}
 

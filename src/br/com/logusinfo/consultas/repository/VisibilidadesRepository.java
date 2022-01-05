@@ -50,7 +50,7 @@ public class VisibilidadesRepository {
 				visibilidade.setIdCubo(rs.getString(2));
 				visibilidade.setCodigoUsuario(rs.getString(3));
 				visibilidade.setCodigoPerfil(rs.getString(4));
-				visibilidade.setExpressaoFiltro(rs.getString(5));
+				visibilidade.setExpressaoFiltro(rs.getString(5));				
 				visibilidades.add(visibilidade);
 			}
 		} catch (ConnectionException | SQLException e) {
